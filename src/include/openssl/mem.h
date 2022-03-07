@@ -110,6 +110,16 @@ OPENSSL_EXPORT int OPENSSL_strcasecmp(const char *a, const char *b);
 /* OPENSSL_strncasecmp has the same behaviour as strncasecmp(3). */
 OPENSSL_EXPORT int OPENSSL_strncasecmp(const char *a, const char *b, size_t n);
 
+// CRYPTO_malloc calls |OPENSSL_malloc|. |file| and |line| are ignored.
+OPENSSL_EXPORT void *CRYPTO_malloc(size_t size, const char *file, int line);
+
+// CRYPTO_realloc calls |OPENSSL_realloc|. |file| and |line| are ignored.
+OPENSSL_EXPORT void *CRYPTO_realloc(void *ptr, size_t new_size,
+                                    const char *file, int line);
+
+// CRYPTO_free calls |OPENSSL_free|. |file| and |line| are ignored.
+OPENSSL_EXPORT void CRYPTO_free(void *ptr, const char *file, int line);
+
 /* DECIMAL_SIZE returns an upper bound for the length of the decimal
  * representation of the given type. */
 #define DECIMAL_SIZE(type)	((sizeof(type)*8+2)/3+1)
